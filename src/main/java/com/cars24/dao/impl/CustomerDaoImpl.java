@@ -4,6 +4,7 @@ package com.cars24.dao.impl;
 
 import com.cars24.data.req.AddCustomerReq;
 import com.cars24.data.req.CustomerProfileReq;
+import com.cars24.data.req.DeleteReq;
 import com.cars24.data.res.CustomerProfileRes;
 import com.cars24.util.DbUtil;
 import com.cars24.dao.CustomersDao;
@@ -110,4 +111,38 @@ public class CustomerDaoImpl implements CustomersDao {
 
         return null;
     }
+
+    @Override
+    public String delete_customer(DeleteReq deleteReq) {
+        // SQL DELETE statement to delete a customer based on phone or email
+        String deleteSQL = "DELETE FROM customers WHERE phone = ? OR email = ?";
+
+        // Get the database connection
+        Connection connection = DbUtil.getDbConnection();
+
+        try {
+            // Prepare the DELETE statement
+            PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL);
+
+            // Set the phone or email parameter (can be either phone or email)
+            preparedStatement.setString(1, deleteReq.getPhone());
+            preparedStatement.setString(2, deleteReq.getEmail());
+
+            // Execute the DELETE query
+            int rowsDeleted = preparedStatement.executeUpdate();
+
+            // Check if any row was deleted
+            if (rowsDeleted > 0) {
+                return "Customer deleted successfully";
+            } else {
+                return "No customer found with the given phone or email";
+            }
+        } catch (Exception e) {
+            // Print the exception if there's any error during the deletion process
+            System.out.println("Error while deleting customer");
+            e.printStackTrace();
+            return "Error while deleting customer";
+        }
+    }
+
 }

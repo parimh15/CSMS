@@ -2,6 +2,7 @@ package com.cars24.services;
 
 import com.cars24.data.req.AddCustomerReq;
 import com.cars24.data.req.CustomerProfileReq;
+import com.cars24.data.req.DeleteReq;
 import com.cars24.data.res.CustomerProfileRes;
 
 public interface CustomerService {
@@ -10,4 +11,6 @@ public interface CustomerService {
     //create another class for response just like addcustomerreq hence create another package res inside data like req
 
     CustomerProfileRes get_CustomerProfile(CustomerProfileReq customerProfileReq);
+
+    public String delete_customer(DeleteReq deleteReq);
 }

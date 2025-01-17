@@ -2,6 +2,7 @@ package com.cars24.dao;
 
 import com.cars24.data.req.AddCustomerReq;
 import com.cars24.data.req.CustomerProfileReq;
+import com.cars24.data.req.DeleteReq;
 import com.cars24.data.res.CustomerProfileRes;
 
 public interface CustomersDao {
@@ -10,6 +11,6 @@ public interface CustomersDao {
     public String CreateCustomer(AddCustomerReq addCustomerReq);
     public CustomerProfileRes get_customer(CustomerProfileReq customerProfileReq);
     //public void update_customer();
-    //public void delete_customer();
+    public String delete_customer(DeleteReq deleteReq);
 
 }
